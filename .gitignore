@@ -1,0 +1,8 @@
+
+data/project/july.week5.800mb.csv.processed
+data/project/july.week5.800mb.csv.truth
+temp/ScoreF2.txt
+temp/ScoreR.txt
+temp/ScoreF3.txt
+data/DARPA/darpa_ground_truth.csv
+data/DARPA/darpa_processed.csv

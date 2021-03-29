@@ -61,8 +61,8 @@ class FilteringCore:
 		self.numCurrentSource.Add(self.indexSource)
 		self.numCurrentDestination.Hash(self.indexDestination, destination)
 		self.numCurrentDestination.Add(self.indexDestination)
-		return max([
-			self.scoreEdge.Assign(self.indexEdge, self.ComputeScore(self.numCurrentEdge(self.indexEdge), self.numTotalEdge(self.indexEdge), timestamp)),
-			self.scoreSource.Assign(self.indexSource, self.ComputeScore(self.numCurrentSource(self.indexSource), self.numTotalSource(self.indexSource), timestamp)),
-			self.scoreDestination.Assign(self.indexDestination, self.ComputeScore(self.numCurrentDestination(self.indexDestination), self.numTotalDestination(self.indexDestination), timestamp))
-		])
+		return {
+			'edge': round(self.scoreEdge.Assign(self.indexEdge, self.ComputeScore(self.numCurrentEdge(self.indexEdge), self.numTotalEdge(self.indexEdge), timestamp)), 6),
+			'source': round(self.scoreSource.Assign(self.indexSource, self.ComputeScore(self.numCurrentSource(self.indexSource), self.numTotalSource(self.indexSource), timestamp)), 6),
+			'dest': round(self.scoreDestination.Assign(self.indexDestination, self.ComputeScore(self.numCurrentDestination(self.indexDestination), self.numTotalDestination(self.indexDestination), timestamp)), 6)
+		}

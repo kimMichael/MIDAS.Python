@@ -35,7 +35,7 @@ class RelationalCore:
 
 	@staticmethod
 	def ComputeScore(a: float, s: float, t: float) -> float:
-		return 0 if s == 0 or t - 1 == 0 else pow((a - s / t) * t, 2) / (s * (t - 1))
+		return 0 if s == 0 or (t - 1) == 0 else pow((a - s / t) * t, 2) / (s * (t - 1))
 
 	def __call__(self, source: int, destination: int, timestamp: int) -> float:
 		if self.timestamp < timestamp:
@@ -52,8 +52,8 @@ class RelationalCore:
 		self.numCurrentDestination.Hash(self.indexDestination, destination)
 		self.numCurrentDestination.Add(self.indexDestination)
 		self.numTotalDestination.Add(self.indexDestination)
-		return max([
-			self.ComputeScore(self.numCurrentEdge(self.indexEdge), self.numTotalEdge(self.indexEdge), timestamp),
-			self.ComputeScore(self.numCurrentSource(self.indexSource), self.numTotalSource(self.indexSource), timestamp),
-			self.ComputeScore(self.numCurrentDestination(self.indexDestination), self.numTotalDestination(self.indexDestination), timestamp),
-		])
+		return {
+			'edge': round(self.ComputeScore(self.numCurrentEdge(self.indexEdge), self.numTotalEdge(self.indexEdge), timestamp), 6),
+			'source': round(self.ComputeScore(self.numCurrentSource(self.indexSource), self.numTotalSource(self.indexSource), timestamp),6),
+			'dest': round(self.ComputeScore(self.numCurrentDestination(self.indexDestination), self.numTotalDestination(self.indexDestination), timestamp), 6),
+		}
